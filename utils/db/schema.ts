@@ -15,5 +15,7 @@ export const Subscription = pgTable('subscriptions', {
     stripeSubscriptionId: varchar('stripe_subscription_id', { length: 255 }).notNull(),
     plan: varchar('plan', { length: 50 }).notNull(),
     status: varchar('status', { length: 50 }).notNull(),
-    
+    currentPeriodStart: timestamp('current_period_start').notNull(),
+    currentPeriodEnd: timestamp('current_period_end').notNull(),
+    cancelPeriodAt: boolean('cancel_period_at').notNull().default(false),
 })
