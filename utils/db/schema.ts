@@ -1,6 +1,6 @@
 import { integer, varchar, pgTable, text, serial, timestamp, boolean } from 'drizzle-orm/pg-core'
 
-export const User = pgTable('users', {
+export const Users = pgTable('users', {
     id: serial('id').primaryKey(),
     stripeCustomerId: text('stripe_customer_id').unique(),
     email: text('email').notNull().unique(),
@@ -9,9 +9,9 @@ export const User = pgTable('users', {
     createdAt: timestamp('created_at').defaultNow(),
 })
 
-export const Subscription = pgTable('subscriptions', {
+export const Subscriptions = pgTable('subscriptions', {
     id: serial('id').primaryKey(),
-    userId: integer('user_id').references(() => User.id).notNull(),
+    userId: integer('user_id').references(() => Users.id).notNull(),
     stripeSubscriptionId: varchar('stripe_subscription_id', { length: 255 }).notNull(),
     plan: varchar('plan', { length: 50 }).notNull(),
     status: varchar('status', { length: 50 }).notNull(),
@@ -20,9 +20,9 @@ export const Subscription = pgTable('subscriptions', {
     cancelAtPeriodEnd: boolean('cancel_at_period_end').notNull().default(false),
 })
 
-export const GenratedContent = pgTable('generated_content', {
+export const GeneratedContent = pgTable('generated_content', {
     id: serial('id').primaryKey(),
-    userId: integer('user_id').references(() => User.id).notNull(),
+    userId: integer('user_id').references(() => Users.id).notNull(),
     content: text('content').notNull(),
     prompt: text('prompt').notNull(),
     contentType: varchar('content_type', { length: 50 }).notNull(),
