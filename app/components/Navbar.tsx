@@ -82,8 +82,8 @@ export default function Navbar() {
                   }}
                 />
               </SignedIn>
-            </div>
-          </div>
+                        </div>
+                    </div>
                 </div>
             </nav>
         </header>
